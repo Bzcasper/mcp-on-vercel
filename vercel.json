@@ -1,7 +1,6 @@
 {
   "version": 2,
   "name": "mcp-supabase-server",
-  "description": "MCP (Model Context Protocol) server with Supabase integration on Vercel",
   "rewrites": [
     {
       "source": "/api/mcp",
