@@ -2,30 +2,18 @@
   "version": 2,
   "name": "mcp-supabase-server",
   "description": "MCP (Model Context Protocol) server with Supabase integration on Vercel",
-  "builds": [
+  "rewrites": [
     {
-      "src": "api/server.ts",
-      "use": "@vercel/node@3.0.21",
-      "config": {
-        "maxLambdaSize": "50mb",
-        "runtime": "nodejs18.x"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/mcp",
-      "dest": "api/server.ts",
-      "methods": ["POST", "OPTIONS"]
+      "source": "/api/mcp",
+      "destination": "/api/server"
     },
     {
-      "src": "/health",
-      "dest": "api/server.ts",
-      "methods": ["GET"]
+      "source": "/health",
+      "destination": "/api/server"
     },
     {
-      "src": "/(.*)",
-      "dest": "api/server.ts"
+      "source": "/(.*)",
+      "destination": "/api/server"
     }
   ],
   "headers": [
