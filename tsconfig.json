@@ -1,13 +1,85 @@
 {
   "compilerOptions": {
-    "module": "NodeNext",
-    "declaration": true,
-    "target": "ES2021",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "lib": ["ES2022", "DOM"],
+    "allowJs": true,
+    "skipLibCheck": true,
     "strict": true,
-    "skipLibCheck": true
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "incremental": false,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "outDir": "./dist",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@/lib/*": ["./lib/*"],
+      "@/api/*": ["./api/*"]
+    },
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types"],
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "exactOptionalPropertyTypes": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": false,
+    "noImplicitOverride": true,
+    "useDefineForClassFields": true,
+    "experimentalDecorators": false,
+    "emitDecoratorMetadata": false,
+    "allowUmdGlobalAccess": false,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "verbatimModuleSyntax": false
   },
-  "include": ["src/**/*", "api/**/*"],
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "api/**/*",
+    "lib/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    ".vercel",
+    "dist",
+    "build",
+    "coverage",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.d.ts",
+    ".env*",
+    "*.config.js",
+    "*.config.ts"
+  ],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "compilerOptions": {
+      "module": "ESNext",
+      "target": "ES2022",
+      "moduleResolution": "node"
+    }
+  }
 }

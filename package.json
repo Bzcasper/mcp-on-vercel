@@ -1,21 +1,67 @@
 {
   "name": "mcp-on-vercel",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Enhanced MCP Server for MoneyPrinterTurbo deployed on Vercel",
   "type": "module",
+  "main": "api/server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vercel dev",
+    "build": "tsc --noEmit",
+    "deploy": "vercel --prod",
+    "test": "node --test",
+    "lint": "eslint . --ext .ts,.js",
+    "typecheck": "tsc --noEmit",
+    "local": "vercel dev --listen 3000",
+    "test-endpoint": "node scripts/test-client.mjs",
+    "deploy-preview": "vercel"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@9.4.0",
   "dependencies": {
-    "mcp-handler": "^1.0.1",
-    "zod": "^3.24.2"
+    "@supabase/supabase-js": "^2.53.0",
+    "@vercel/node": "^3.2.29",
+    "zod": "^4.0.10"
   },
   "devDependencies": {
-    "@types/node": "^22.13.10"
+    "@types/node": "^20.19.9",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "vercel": "^33.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bzcasper/MoneyPrinterTurbo-main--3-"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "video-generation",
+    "ai",
+    "vercel",
+    "supabase",
+    "serverless",
+    "api",
+    "moneyprinterturbo"
+  ],
+  "author": "MoneyPrinterTurbo Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bzcasper/MoneyPrinterTurbo-main--3-/issues"
+  },
+  "homepage": "https://github.com/Bzcasper/MoneyPrinterTurbo-main--3-#readme",
+  "vercel": {
+    "functions": {
+      "api/server.ts": {
+        "runtime": "nodejs18.x",
+        "memory": 1024,
+        "maxDuration": 30
+      }
+    },
+    "env": {
+      "NODE_ENV": "production"
+    }
   }
 }

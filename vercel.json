@@ -1,8 +1,68 @@
 {
-  "rewrites": [{ "source": "/(.+)", "destination": "/api/server" }],
+  "version": 2,
+  "name": "mcp-supabase-server",
+  "description": "MCP (Model Context Protocol) server with Supabase integration on Vercel",
+  "builds": [
+    {
+      "src": "api/server.ts",
+      "use": "@vercel/node@3.0.21",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "runtime": "nodejs18.x"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/mcp",
+      "dest": "api/server.ts",
+      "methods": ["POST", "OPTIONS"]
+    },
+    {
+      "src": "/health",
+      "dest": "api/server.ts",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "api/server.ts"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization, X-Requested-With"
+        },
+        {
+          "key": "Access-Control-Max-Age",
+          "value": "86400"
+        }
+      ]
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
   "functions": {
     "api/server.ts": {
-      "maxDuration": 60
+      "runtime": "nodejs18.x",
+      "memory": 1024,
+      "maxDuration": 30
     }
+  },
+  "regions": ["iad1"],
+  "github": {
+    "silent": true
   }
 }
