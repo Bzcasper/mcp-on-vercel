@@ -255,23 +255,11 @@ export class VercelMCPClient {
   }
 
   private async makeRequest(request: MCPRequest): Promise<MCPResponse> {
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    };
-
-    // Add authentication headers
-    if (this.config.authType === 'api_key' && this.config.apiKey) {
-      headers['X-API-Key'] = this.config.apiKey;
-    } else if (this.config.authType === 'bearer' && this.config.token) {
-      headers['Authorization'] = `Bearer ${this.config.token}`;
-    } else if (this.config.authType === 'jwt' && this.config.token) {
-      headers['Authorization'] = `JWT ${this.config.token}`;
-    }
-
+    const headers: Record<string, string> = this.buildHeaders();
+    
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), this.config.timeout);
-
+    
     try {
       const response = await fetch(this.config.serverUrl, {
         method: 'POST',
@@ -279,13 +267,13 @@ export class VercelMCPClient {
         body: JSON.stringify(request),
         signal: controller.signal
       });
-
+      
       clearTimeout(timeoutId);
-
+      
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
-
+      
       const data = await response.json();
       return this.validateResponse(data);
     } catch (error) {
@@ -297,6 +285,23 @@ export class VercelMCPClient {
       
       throw error;
     }
+  }
+  
+  private buildHeaders(): Record<string, string> {
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    };
+    
+    if (this.config.authType === 'api_key' && this.config.apiKey) {
+      headers['X-API-Key'] = this.config.apiKey;
+    } else if (this.config.authType === 'bearer' && this.config.token) {
+      headers['Authorization'] = `Bearer ${this.config.token}`;
+    } else if (this.config.authType === 'jwt' && this.config.token) {
+      headers['Authorization'] = `JWT ${this.config.token}`;
+    }
+    
+    return headers;
   }
 
   private validateResponse(data: any): MCPResponse {

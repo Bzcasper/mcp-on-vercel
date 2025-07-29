@@ -640,11 +640,11 @@ export class UnifiedMCPServer {
     };
   }
 
-  private createErrorResponse(id: any, code: number, message: string): MCPResponse {
+  private createErrorResponse(id: any, code: number, message: string, data?: any): MCPResponse {
     return {
       jsonrpc: '2.0',
       id,
-      error: { code, message }
+      error: { code, message, data }
     };
   }
 

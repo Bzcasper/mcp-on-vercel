@@ -18,7 +18,7 @@ const generateId = (prefix: string) => `${prefix}_${Date.now()}_${Math.random().
 // Response helpers
 export const createSuccessResponse = (data: any, message?: string) => ({
   content: [{
-    type: "text" as const,
+    type: "text",
     text: JSON.stringify({
       success: true,
       data,
@@ -30,7 +30,7 @@ export const createSuccessResponse = (data: any, message?: string) => ({
 
 export const createErrorResponse = (error: string, context?: any) => ({
   content: [{
-    type: "text" as const,
+    type: "text",
     text: JSON.stringify({
       success: false,
       error,
