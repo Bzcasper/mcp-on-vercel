@@ -40,8 +40,8 @@ interface MCPError {
 interface MCPTool {
   name: string;
   description: string;
-  inputSchema: any;
-  outputSchema?: any;
+  input_schema: any;
+  output_schema?: any;
   category: string;
 }
 
@@ -153,7 +153,7 @@ class SupabaseToolsProvider {
     registry.registerTool({
       name: 'supabase_query',
       description: 'Execute a SQL query on Supabase database',
-      inputSchema: {
+      input_schema: {
         type: 'object',
         properties: {
           query: { type: 'string', description: 'SQL query to execute' },
@@ -167,7 +167,7 @@ class SupabaseToolsProvider {
     registry.registerTool({
       name: 'supabase_select',
       description: 'Select data from a Supabase table',
-      inputSchema: {
+      input_schema: {
         type: 'object',
         properties: {
           table: { type: 'string', description: 'Table name' },
@@ -183,7 +183,7 @@ class SupabaseToolsProvider {
     registry.registerTool({
       name: 'supabase_insert',
       description: 'Insert data into a Supabase table',
-      inputSchema: {
+      input_schema: {
         type: 'object',
         properties: {
           table: { type: 'string', description: 'Table name' },
@@ -197,7 +197,7 @@ class SupabaseToolsProvider {
     registry.registerTool({
       name: 'supabase_update',
       description: 'Update data in a Supabase table',
-      inputSchema: {
+      input_schema: {
         type: 'object',
         properties: {
           table: { type: 'string', description: 'Table name' },
@@ -290,17 +290,17 @@ class MoneyPrinterToolsProvider {
     registry.registerTool({
       name: 'generate_video_script',
       description: 'Generate a video script based on a subject and parameters',
-      inputSchema: {
+      input_schema: {
         type: 'object',
         properties: {
           video_subject: { type: 'string', description: 'The subject/topic for the video' },
           language: { type: 'string', description: 'Language for the script', default: '' },
-          paragraph_number: { 
-            type: 'integer', 
-            description: 'Number of paragraphs', 
-            default: 1, 
-            minimum: 1, 
-            maximum: 10 
+          paragraph_number: {
+            type: 'integer',
+            description: 'Number of paragraphs',
+            default: 1,
+            minimum: 1,
+            maximum: 10
           }
         },
         required: ['video_subject']
@@ -311,17 +311,17 @@ class MoneyPrinterToolsProvider {
     registry.registerTool({
       name: 'generate_video_terms',
       description: 'Generate search terms for finding relevant video materials',
-      inputSchema: {
+      input_schema: {
         type: 'object',
         properties: {
           video_subject: { type: 'string', description: 'The video subject' },
           video_script: { type: 'string', description: 'The video script content' },
-          amount: { 
-            type: 'integer', 
-            description: 'Number of search terms', 
-            default: 5, 
-            minimum: 1, 
-            maximum: 20 
+          amount: {
+            type: 'integer',
+            description: 'Number of search terms',
+            default: 5,
+            minimum: 1,
+            maximum: 20
           }
         },
         required: ['video_subject', 'video_script']
@@ -332,16 +332,16 @@ class MoneyPrinterToolsProvider {
     registry.registerTool({
       name: 'create_video',
       description: 'Create a complete video with script, voice, and visual elements',
-      inputSchema: {
+      input_schema: {
         type: 'object',
         properties: {
           video_subject: { type: 'string', description: 'The video subject/topic' },
           video_script: { type: 'string', description: 'Pre-written script (optional)' },
-          video_aspect: { 
-            type: 'string', 
-            enum: ['16:9', '9:16', '1:1'], 
-            description: 'Video aspect ratio', 
-            default: '9:16' 
+          video_aspect: {
+            type: 'string',
+            enum: ['16:9', '9:16', '1:1'],
+            description: 'Video aspect ratio',
+            default: '9:16'
           },
           voice_name: { type: 'string', description: 'Voice to use for narration' },
           bgm_type: { type: 'string', description: 'Background music type', default: 'random' },
@@ -355,24 +355,24 @@ class MoneyPrinterToolsProvider {
     registry.registerTool({
       name: 'synthesize_voice',
       description: 'Convert text to speech using various voice options',
-      inputSchema: {
+      input_schema: {
         type: 'object',
         properties: {
           text: { type: 'string', description: 'Text to convert to speech' },
           voice_name: { type: 'string', description: 'Voice to use for synthesis' },
-          voice_rate: { 
-            type: 'number', 
-            description: 'Speech rate (0.5-2.0)', 
-            default: 1.0, 
-            minimum: 0.5, 
-            maximum: 2.0 
+          voice_rate: {
+            type: 'number',
+            description: 'Speech rate (0.5-2.0)',
+            default: 1.0,
+            minimum: 0.5,
+            maximum: 2.0
           },
-          voice_volume: { 
-            type: 'number', 
-            description: 'Voice volume (0.0-1.0)', 
-            default: 1.0, 
-            minimum: 0.0, 
-            maximum: 1.0 
+          voice_volume: {
+            type: 'number',
+            description: 'Voice volume (0.0-1.0)',
+            default: 1.0,
+            minimum: 0.0,
+            maximum: 1.0
           }
         },
         required: ['text', 'voice_name']

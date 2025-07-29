@@ -70,13 +70,15 @@ export class VercelMCPClient {
 
   constructor(config: MCPClientConfig) {
     this.config = {
-      authType: 'api_key',
-      timeout: 30000,
-      maxRetries: 3,
-      retryDelay: 1000,
-      enableCaching: true,
-      cacheTtl: 300000, // 5 minutes for serverless
-      ...config
+      serverUrl: config.serverUrl,
+      authType: config.authType || 'api_key',
+      apiKey: config.apiKey || '',
+      token: config.token || '',
+      timeout: config.timeout || 30000,
+      maxRetries: config.maxRetries || 3,
+      retryDelay: config.retryDelay || 1000,
+      enableCaching: config.enableCaching !== undefined ? config.enableCaching : true,
+      cacheTtl: config.cacheTtl || 300000 // 5 minutes for serverless
     };
   }
 
